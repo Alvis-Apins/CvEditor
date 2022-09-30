@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CvWorkExperienceEditController!{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center w-full">
+        <div class="w-1/3 items-center rounded p-6">
+            <div>
+                <h1 class="flex justify-center my-10 text-3xl"> Work Experience Info</h1
+            </div>
+            {{ form(job_experience_form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CvWorkExperienceSkillEditController!{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center w-full">
+        <div class="w-1/3 items-center rounded p-6">
+            <h1 class="flex justify-center my-10 text-3xl"> Skill Info</h1>
+            {{ form(job_skill_form) }}
+        </div>
+    </div>
+
+    {% if skills|length > 0 %}
+        <button type="button"
+                class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+            Skills
+        </button>
+        <div class="hidden overflow-hidden">
+            <div>
+                <table class="min-w-full mb-2">
+                    <thead class="background-silver color-gold-leaf">
+                    <tr class="px-6 py-2">
+                        <th scope="col" class="text-sm font-medium px-4 w-20">
+                            #
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-left">
+                            Skill
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-left">
+                            Type
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for skill in skills %}
+                        <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                            <td class="text-sm text-white font-light py-2 pl-8">
+                                {{ loop.index }}
+                            </td>
+                            <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                {{ skill.skill }}
+                            </td>
+                            <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                {{ skill.type }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <script>
+        const coll = document.getElementsByClassName("collapsible");
+        let i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+{% endblock %}

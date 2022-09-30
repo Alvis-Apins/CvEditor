@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body class="background-paper">
+
+<nav class="py-4">
+    <div class="px-8 mx-auto background-black-steel h-16">
+        <div class="flex justify-between mt-6">
+            <!-- navbar left side -->
+            <div class="flex px-8 mt-3">
+                <div class="pr-8 py-1.5 flex">
+                    <div class="hover:text-gray-300 transition duration-500 hover:scale-105">
+                        <a href="/" class="mx-3 color-gold-leaf border-b-2 border-orange-200 pb-1">Home</a>
+                    </div>
+                    <div class="hover:text-gray-300 transition duration-500 hover:scale-105">
+                        <a href="/cv-edit" class="mx-3 color-gold-leaf border-b-2 border-orange-200 pb-1">Create CV</a>
+                    </div>
+                    <div class="hover:text-gray-300 transition duration-500 hover:scale-105">
+                        <a href="/cv-list" class="mx-3 color-gold-leaf border-b-2 border-orange-200 pb-1">CV List</a>
+                    </div>
+                </div>
+            </div>
+            <!-- nav bar right side -->
+            <div class="flex px-8 mt-3">
+                <div class="flex items-center space-x-8">
+                    <div class="hover:text-gray-300 transition duration-500 hover:scale-105">
+                        <a href="/view-cv" class="mx-3 color-gold-leaf border-b-2 border-orange-200 pb-1">View CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% block body %}{% endblock %}
+</body>
 </html>

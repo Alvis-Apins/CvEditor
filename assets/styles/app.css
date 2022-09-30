@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.color-black-steel {
+    color: #080706;
+}
+.background-black-steel {
+    background-color: #080706;
+}
+
+.color-paper {
+    color: #EFEFEF;
+}
+.background-paper {
+    background-color: #EFEFEF;
+}
+
+.color-gold-leaf {
+    color: #D1B280;
+}
+.background-gold-leaf {
+    background-color: #D1B280;
+}
+
+.color-silver {
+    color: #594D46;
+}
+.background-silver {
+    background-color: #594D46;
+}

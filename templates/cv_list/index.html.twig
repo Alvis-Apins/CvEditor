@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CvListController!{% endblock %}
+
+{% block body %}
+    <div class="flex justify-center">
+        <div class="w-fit">
+            <div class="flex justify-center px-8 ">
+                <div class="overflow-x-auto ">
+                    <div class="flex justify-between py-2 inline-block pb-32">
+                        <div class="overflow-hidden rounded">
+                            <div class="flex p-2 background-black-steel border-b color-gold-leaf border-black justify-center">
+                                <h1> List of Cv's </h1>
+                            </div>
+                            <table class="min-w-full">
+                                <thead class="background-silver opacity-80 color-gold-leaf opacity-75">
+                                <tr>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        Surname
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        View
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cv in cvs %}
+
+                                    <tr class="background-silver color-gold-leaf border-b border-b-black">
+                                        <td class="text-sm font-light px-6 py-4 whitespace-nowrap">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            {{ cv.name }}
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            {{ cv.surname }}
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            {{ cv.email }}
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            <form action="{{ path('app_cv_list_edit') }}" method="post">
+                                                <input type="hidden" value="{{ cv.id }}" id="cv_id" name="cv_id">
+                                                <button type="submit" class="ml-2 rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            <form action="{{ path('app_cv_list_view') }}" method="post">
+                                                <input type="hidden" value="{{ cv.id }}" id="cv_id" name="cv_id">
+                                                <button type="submit" class="ml-2 rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    View
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                                            <form action="{{ path('app_cv_list_delete') }}" method="post">
+                                                <input type="hidden" value="{{ cv.id }}" id="cv_id" name="cv_id">
+                                                <button type="submit" class="ml-2 rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

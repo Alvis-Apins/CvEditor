@@ -1,0 +1,697 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CvMainEditController!{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center w-full">
+        <div class="w-full items-center rounded mb-10">
+            <div class="background-silver border-b-4 border-black py-6 w-full">
+                <h1 class="flex justify-center text-3xl color-gold-leaf"> Create / Edit Cv </h1>
+            </div>
+            <div class="flex justify-center">
+
+                <form method="post">
+                    {% if base_info is defined %}
+                        <button type="submit" name="action" value="create"
+                                class="border-b-4 border-orange-200 m-2 shadow-lg border-solid background-black-steel color-gold-leaf border border-black px-4 py-2 h-10 rounded float-right transition duration-500 hover:scale-105">
+                            Generate Cv
+                        </button>
+                        <button type="submit" name="action" value="photo"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Photo
+                        </button>
+                        <button type="submit" name="action" value="cv_web_links_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add WebLink
+                        </button>
+                        <button type="submit" name="action" value="cv_language_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Language
+                        </button>
+                        <button type="submit" name="action" value="cv_references_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Reference
+                        </button>
+                        <button type="submit" name="action" value="cv_work_experience_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Work Experience
+                        </button>
+                        <button type="submit" name="action" value="cv_education_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Education
+                        </button>
+                        <button type="submit" name="action" value="cv_address_edit"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Address
+                        </button>
+                    {% endif %}
+                    {% if base_info is not defined %}
+                        <button type="submit" name="action" value="edit_cv"
+                                class="border-b-4 border-black m-2 shadow-lg px-4 py-2 h-10 rounded float-right background-silver bg-opacity-75 color-gold-leaf hover:text-orange-200 hover:bg-black transition duration-500 hover:scale-105">
+                            Add Base Info
+                        </button>
+                    {% endif %}
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center justify-center w-full pb-20">
+        <div class="w-full">
+            {% if base_info is defined %}
+                {% if base_info != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Base
+                        Info
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Surname
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Phone
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Summary
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                    <td class="text-sm text-white font-light py-2 pl-8">
+                                        1
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ base_info.name }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ base_info.surname }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ base_info.email }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ base_info.phone }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                        {{ base_info.about }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                        <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                            <input type="hidden" value="{{ base_info.id }}" id="base" name="base">
+                                            <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                Edit
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if address is defined %}
+                {% if address != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Address
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Country
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Index
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        City
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        House name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Street
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Street Nr.
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Apartment
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                    <td class="text-sm text-white font-light py-2 pl-8">
+                                        1
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.country }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.index }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.city }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.houseName }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.street }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.streetNumber }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                        {{ address.apartmentNumber }}
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                        <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                            <input type="hidden" value="{{ address.id }}" id="address" name="address">
+                                            <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                Edit
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                        <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                            <input type="hidden" value="{{ address.id }}" id="address" name="address">
+                                            <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if educations is defined %}
+                {% if educations != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Education
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Institution
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Faculty
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Study Field
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Education Level
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Start date
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        End date
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for education in educations %}
+                                    <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                        <td class="text-sm text-white font-light py-2 pl-8">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.institution }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.faculty }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.studyField }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.educationLevel }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {% if education.status == true %}
+                                                Finished
+                                            {% else %}
+                                                Unfinished
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.startDate|date('Y-m-d') }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ education.endDate|date('Y-m-d') }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                <input type="hidden" value="{{ education.id }}" id="education" name="education">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                <input type="hidden" value="{{ education.id }}" id="education" name="education">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if work_experiences is defined %}
+                {% if work_experiences != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Work
+                        Experience
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Company
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Job Title
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Workload
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Start date
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        End date
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for work_experience in work_experiences %}
+                                    <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                        <td class="text-sm text-white font-light py-2 pl-8">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ work_experience.company }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ work_experience.jobTitle }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ work_experience.workLoad }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ work_experience.startDate|date('Y-m-d') }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ work_experience.endDate|date('Y-m-d') }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                <input type="hidden" value="{{ work_experience.id }}" id="work" name="work">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                <input type="hidden" value="{{ work_experience.id }}" id="work" name="work">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if work_experience_skills is defined %}
+                {% if work_experience_skills != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Work
+                        Experience Skills
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Job
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Skill
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Type
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for skills in work_experience_skills %}
+                                    {% for skill in skills %}
+                                        <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                            <td class="text-sm text-white font-light py-2 pl-8">
+                                                {{ loop.index }}
+                                            </td>
+                                            <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                                {{ skill.job.company }}
+                                            </td>
+                                            <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                                {{ skill.skill }}
+                                            </td>
+                                            <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                                {{ skill.type }}
+                                            </td>
+                                            <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                                <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                    <input type="hidden" value="{{ skill.id }}" id="skill" name="skill">
+                                                    <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                        Edit
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                                <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                    <input type="hidden" value="{{ skill.id }}" id="skill" name="skill">
+                                                    <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if languages is defined %}
+                {% if languages != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Languages
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Country
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Index
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for language in languages %}
+                                    <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                        <td class="text-sm text-white font-light py-2 pl-8">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ language.language }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ language.level }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                <input type="hidden" value="{{ language.id }}" id="language" name="language">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                <input type="hidden" value="{{ language.id }}" id="language" name="language">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if web_links is defined %}
+                {% if web_links != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Web
+                        Addresses
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Url / Link / Web-address
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for link in web_links %}
+                                    <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                        <td class="text-sm text-white font-light py-2 pl-8">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ link.url }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                <input type="hidden" value="{{ link.id }}" id="link" name="link">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                <input type="hidden" value="{{ link.id }}" id="link" name="link">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if references is defined %}
+                {% if references != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        References
+                    </button>
+                    <div class="hidden overflow-hidden">
+                        <div>
+                            <table class="min-w-full mb-2">
+                                <thead class="background-silver color-gold-leaf">
+                                <tr class="px-6 py-2">
+                                    <th scope="col" class="text-sm font-medium px-4 w-20">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Reference
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-left">
+                                        Contact
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Edit
+                                    </th>
+                                    <th scope="col" class="w-20 text-sm font-medium text-left">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for reference in references %}
+                                    <tr class="bg-black bg-opacity-80 border-b border-b-black text-left">
+                                        <td class="text-sm text-white font-light py-2 pl-8">
+                                            {{ loop.index }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ reference.name }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 text-left">
+                                            {{ reference.contact }}
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_edit') }}" method="post">
+                                                <input type="hidden" value="{{ reference.id }}" id="reference" name="reference">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-sm text-white font-light py-2 pr-3 w-60 break-all overflow-auto text-left">
+                                            <form action="{{ path('app_cv_main_delete') }}" method="post">
+                                                <input type="hidden" value="{{ reference.id }}" id="reference" name="reference">
+                                                <button type="submit" class="rounded border border-black text-gray-50  px-4 hover:bg-black transition duration-500 hover:scale-110">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if picture is defined %}
+                {% if picture != null %}
+                    <button type="button"
+                            class="collapsible background-black-steel color-gold-leaf cursor-pointer py-1 w-full mt-2">
+                        Picture
+                    </button>
+                    <div class="hidden overflow-hidden flex items-center justify-center w-full h-auto">
+                        <div class="flex items-center justify-center w-full h-auto" >
+                            <div class="w-40 h-80">
+                                <img src="{{ asset('pictures/' ~ picture.fileName )  }}" alt="{{ picture.fileName }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        const coll = document.getElementsByClassName("collapsible");
+        let i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+{% endblock %}
