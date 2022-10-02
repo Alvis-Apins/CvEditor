@@ -16,10 +16,11 @@
             <header class="mb-8 md:mb-11 w-full color-gold-leaf">
                 <div class="relative w-full">
                     {% if picture is defined %}
-                    {% if picture != null %}
-                    <img class="absolute right-0 top-0 w-20 h-30" src="{{ asset('pictures/' ~ picture.fileName ) }}"
-                         alt="{{ picture.fileName }}">
-                    {% endif %}
+                        {% if picture != null %}
+                            <img class="absolute right-0 top-0 w-20 h-30"
+                                 src="{{ asset('pictures/' ~ picture.fileName ) }}"
+                                 alt="{{ picture.fileName }}">
+                        {% endif %}
                     {% endif %}
                     {% if base_info is defined %}
                     {% if base_info != null %}

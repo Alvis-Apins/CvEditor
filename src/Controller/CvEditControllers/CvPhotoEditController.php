@@ -21,10 +21,8 @@ class CvPhotoEditController extends AbstractController
     {
         $picture = new CvPicture();
         $session = $request->getSession();
-
         $form = $this->createForm(PictureFormType::class);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $request->files->get("picture_form")["file_name"];
             $uploadsDirectory = $this->getParameter('uploads_directory');
@@ -34,7 +32,6 @@ class CvPhotoEditController extends AbstractController
                 $uploadsDirectory,
                 $filename
             );
-            //dd($request->request);
             $cv = $doctrine->getRepository(CvBaseInfo::class)->find($session->get("CvId"));
             $picture->setCv($cv);
             $picture->setFileName($filename);
