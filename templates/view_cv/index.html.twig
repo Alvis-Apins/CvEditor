@@ -45,6 +45,8 @@
                 </section>
                 {% endif %}
                 {% endif %}
+                {% if base_info is defined %}
+                {% if base_info != null %}
                 <section class="mt-8 first:mt-0">
                     <div class="break-inside-avoid">
                         <section class="mb-4.5 break-inside-avoid">
@@ -72,6 +74,8 @@
 
                     </div>
                 </section>
+                {% endif %}
+                {% endif %}
                 {% if work_experiences is defined %}
                     {% if work_experiences != null %}
                         <section class="mb-4.5 break-inside-avoid">
