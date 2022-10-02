@@ -10,8 +10,8 @@ Web application lets you create your CV (Add, Edit, Delete Information and Print
 </pre>
 <pre>
 Required Tools:
-1. Symfony 6
-2. PHP 8.0 or newer
+1. Symfony 6 + CLI installed
+2. PHP 8.1
 3. PostgreSQL - 14.5
 </pre>
 
@@ -19,21 +19,29 @@ Required Tools:
 Setup:
 </p>
 after cloning project locally
+<ul>
+<li>create .env file and add info like in .env.example</li>
+<li>in .env file configure connection to PostgreSQL database</li>
+</ul>
 <pre>
 <b>composer install</b>
 </pre>
 <pre>
 <b>npm install</b>
 </pre>
-<ul>
-<li>create .env file and add info like in .env.example</li>
-<li>in .env file configure connection to PostgreSQL database</li>
-</ul>
+<pre>
+npm run dev
+</pre>
 
+Next commands needs Symfony-CLI installed
+<pre>
+symfony console doctrine:database:create
+</pre>
+<pre>
+symfony server:start -d
+</pre>
 
-
-
-
+<h2> The aplication is set up and ready to go - click on the localhost address that is provided in terminal </h2>
 
 ![Screenshot from 2022-10-03 00-17-49](https://user-images.githubusercontent.com/104777801/193477112-02d7c276-20af-4faa-b5b5-94fcf67dfc4b.png)
 ---
