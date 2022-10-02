@@ -19,16 +19,17 @@ Required Tools:
 Setup:
 </p>
 after cloning project locally
+<ul>
+<li>create .env file and add info like in .env.example</li>
+<li>in .env file configure connection to PostgreSQL database</li>
+</ul>
 <pre>
 <b>composer install</b>
 </pre>
 <pre>
 <b>npm install</b>
 </pre>
-<ul>
-<li>create .env file and add info like in .env.example</li>
-<li>in .env file configure connection to PostgreSQL database</li>
-</ul>
+
 
 
 
