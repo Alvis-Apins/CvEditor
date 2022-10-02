@@ -3,12 +3,6 @@
 {% block title %}Hello ViewCvController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<<<<<<< HEAD
     <div class="print:hidden flex justify-center items-center h-fit w-full">
         <div class="flex justify-center items-center h-16 w-fit">
             <button class="background-black-steel color-gold-leaf px-4 py-2 rounded transition duration-500 hover:scale-105"
@@ -17,23 +11,18 @@
         </div>
     </div>
 
-
     <main class="font-firago hyphens-manual">
         <div class="p-6 mx-auto page max-w-2xl print:max-w-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-16 bg-white">
             <header class="mb-8 md:mb-11 w-full color-gold-leaf">
                 <div class="relative w-full">
-<<<<<<< HEAD
                     {% if picture is defined %}
                     {% if picture != null %}
                     <img class="absolute right-0 top-0 w-20 h-30" src="{{ asset('pictures/' ~ picture.fileName ) }}"
                          alt="{{ picture.fileName }}">
                     {% endif %}
                     {% endif %}
-
-=======
-                    <img class="absolute right-0 top-0 w-20 h-30" src="{{ asset('pictures/' ~ picture.fileName ) }}"
-                         alt="{{ picture.fileName }}">
->>>>>>> 433facb (cleanup)
+                    {% if base_info is defined %}
+                    {% if base_info != null %}
                     <h1 class="text-2xl color-silver font-bold"> {{ base_info.name }} {{ base_info.surname }} </h1>
                     <p> Email: {{ base_info.email }}</p>
                     <p> Phone: {{ base_info.phone }}</p>
@@ -54,6 +43,8 @@
                         </section>
                     </div>
                 </section>
+                {% endif %}
+                {% endif %}
                 <section class="mt-8 first:mt-0">
                     <div class="break-inside-avoid">
                         <section class="mb-4.5 break-inside-avoid">
@@ -203,15 +194,5 @@
             </div>
         </div>
     </main>
-=======
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
->>>>>>> parent of 433facb (cleanup)
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/apo/PhpstormProjects/CvEditor/src/Controller/ViewCvController.php'|file_link(0) }}">src/Controller/ViewCvController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/apo/PhpstormProjects/CvEditor/templates/view_cv/index.html.twig'|file_link(0) }}">templates/view_cv/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
