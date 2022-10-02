@@ -3,18 +3,190 @@
 {% block title %}Hello ViewCvController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="print:hidden flex justify-center items-center h-fit w-full">
+        <div class="flex justify-center items-center h-16 w-fit">
+            <button class="background-black-steel color-gold-leaf px-4 py-2 rounded transition duration-500 hover:scale-105"
+                    onclick="window.print()">Print Cv
+            </button>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/apo/PhpstormProjects/CvEditor/src/Controller/ViewCvController.php'|file_link(0) }}">src/Controller/ViewCvController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/apo/PhpstormProjects/CvEditor/templates/view_cv/index.html.twig'|file_link(0) }}">templates/view_cv/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    <main class="font-firago hyphens-manual">
+        <div class="p-6 mx-auto page max-w-2xl print:max-w-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-16 bg-white">
+            <header class="mb-8 md:mb-11 w-full color-gold-leaf">
+                <div class="relative w-full">
+                    <img class="absolute right-0 top-0 w-20 h-30" src="{{ asset('pictures/' ~ picture.fileName ) }}"
+                         alt="{{ picture.fileName }}">
+                    <h1 class="text-2xl color-silver font-bold"> {{ base_info.name }} {{ base_info.surname }} </h1>
+                    <p> Email: {{ base_info.email }}</p>
+                    <p> Phone: {{ base_info.phone }}</p>
+                </div>
+            </header>
+            <div class="md:col-count-2 print:col-count-2 col-gap-md md:h-letter-col print:h-letter-col col-fill-auto">
+                <section class="mt-8 first:mt-0">
+                    <div class="break-inside-avoid">
+                        <section class="mb-4.5 break-inside-avoid">
+                            <header>
+                                <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                    About Me
+                                </h3>
+                            </header>
+                            <p class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                {{ base_info.about }}
+                            </p>
+                        </section>
+                    </div>
+                </section>
+                <section class="mt-8 first:mt-0">
+                    <div class="break-inside-avoid">
+                        <section class="mb-4.5 break-inside-avoid">
+                            <header>
+                                <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                    Education
+                                </h3>
+                            </header>
+
+                            {% for education in educations %}
+                                <p class="leading-normal text-sm text-gray-650">
+                                    ({{ education.startDate|date('d/m/Y') }} - {{ education.endDate|date('d/m/Y') }})
+                                </p>
+                                <p class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                    {{ education.institution }} - {{ education.faculty }} - {{ education.studyField }}
+                                    ({{ education.educationLevel }} -
+                                    {% if education.status == true %}
+                                    Finished
+                                {% else %}
+                                    Unfinished
+                                    {% endif %})
+                                </p>
+                            {% endfor %}
+                        </section>
+
+                    </div>
+                </section>
+                {% if work_experiences is defined %}
+                    {% if work_experiences != null %}
+                        <section class="mb-4.5 break-inside-avoid">
+                            <header>
+                                <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                    Work Experience
+                                </h3>
+                                {% for work_experience in work_experiences %}
+                                <p class="leading-normal text-md text-gray-650">
+                                    {{ work_experience.company }} - {{ work_experience.jobTitle }}
+                                </p>
+                                <p class="leading-normal text-sm text-gray-650">
+                                    ({{ work_experience.startDate|date('d/m/Y') }}
+                                    - {{ work_experience.endDate|date('d/m/Y') }})
+                                </p>
+                            </header>
+                            <ul>
+                                {% if work_experience_skills is defined %}
+                                    {% if work_experience_skills != null %}
+                                        {% for skills in work_experience_skills %}
+                                            {% for skill in skills %}
+                                                {% if skill.job.id == work_experience.id %}
+                                                    <li class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                                        <span class="absolute -ml-3 sm:-ml-3.2 select-none transform -translate-y-px">-</span>
+                                                        {{ skill.skill }} ({{ skill.type }})
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                            </ul>
+                            {% endfor %}
+                        </section>
+                    {% endif %}
+                {% endif %}
+
+                {% if languages is defined %}
+                    {% if languages != null %}
+                        <section class="mt-8 first:mt-0">
+                            <div class="break-inside-avoid">
+                                <section class="mb-4.5 break-inside-avoid">
+                                    <header>
+                                        <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                            Languages
+                                        </h3>
+                                    </header>
+                                    <ul>
+                                        {% for language in languages %}
+                                            <li class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                                <span class="absolute -ml-3 sm:-ml-3.2 select-none transform -translate-y-px">-</span>
+                                                {{ language.language }}
+                                                {% if language.level == 1 %}
+                                                    (Elementary Proficiency)
+                                                {% elseif language.level == 2 %}
+                                                    (Limited Working Proficiency)
+                                                {% elseif language.level == 3 %}
+                                                    (Professional Working Proficiency)
+                                                {% elseif language.level == 4 %}
+                                                    (Full Professional Proficiency)
+                                                {% elseif language.level == 5 %}
+                                                    (Native / Bilingual Proficiency)
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endif %}
+
+                {% if references is defined %}
+                    {% if references != null %}
+                        <section class="mt-8 first:mt-0">
+                            <div class="break-inside-avoid">
+                                <section class="mb-4.5 break-inside-avoid">
+                                    <header>
+                                        <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                            References
+                                        </h3>
+                                    </header>
+                                    <ul>
+                                        {% for reference in references %}
+                                            <li class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                                <span class="absolute -ml-3 sm:-ml-3.2 select-none transform -translate-y-px">-</span>
+                                                {{ reference.name }} ({{ reference.contact }})
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endif %}
+
+                {% if web_links is defined %}
+                    {% if web_links != null %}
+                        <section class="mt-8 first:mt-0">
+                            <div class="break-inside-avoid">
+                                <section class="mb-4.5 break-inside-avoid">
+                                    <header>
+                                        <h3 class="text-lg font-semibold text-gray-700 leading-snugish">
+                                            Web Sites
+                                        </h3>
+                                    </header>
+                                    <ul>
+                                        {% for link in web_links %}
+                                            <li class="mt-2.1 text-sm text-gray-700 leading-normal">
+                                                <span class="absolute -ml-3 sm:-ml-3.2 select-none transform -translate-y-px">-</span>
+                                                {{ link.url }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
 {% endblock %}
