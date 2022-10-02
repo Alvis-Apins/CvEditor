@@ -4,7 +4,9 @@ namespace App\Controller\CvEditControllers;
 
 use App\Entity\CvBaseInfo;
 use App\Entity\CvPicture;
+use App\Form\LanguageFormType;
 use App\Form\PictureFormType;
+use Doctrine\DBAL\Exception\DatabaseDoesNotExist;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +34,7 @@ class CvPhotoEditController extends AbstractController
                 $uploadsDirectory,
                 $filename
             );
+            //dd($request->request);
             $cv = $doctrine->getRepository(CvBaseInfo::class)->find($session->get("CvId"));
             $picture->setCv($cv);
             $picture->setFileName($filename);

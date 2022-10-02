@@ -4,12 +4,12 @@ namespace App\Controller\CvEditControllers;
 use App\Entity\CvAddress;
 use App\Entity\CvBaseInfo;
 use App\Form\AddressFormType;
-use App\Repository\CvAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CvAddressEditController extends AbstractController
@@ -18,14 +18,7 @@ class CvAddressEditController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
         $address = new CvAddress();
-        $session = $request->getSession();
-
-        if ($session->get("Edit-Address") != null) {
-            $addressRepository = new CvAddressRepository($doctrine);
-            $address = $addressRepository->find($session->get("Edit-Address"));
-        }
-
-
+        $session = new Session();
         $form = $this->createForm(AddressFormType::class, $address);
 
         $form->handleRequest($request);
@@ -36,13 +29,10 @@ class CvAddressEditController extends AbstractController
             $entityManager->persist($address);
             $entityManager->flush();
 
-            $session->remove("Edit-Address");
-
             return $this->redirectToRoute('app_cv_edit');
         }
 
         return $this->render('cv_address_edit/index.html.twig', [
-            'address' => $address,
             'address_form' => $form->createView()
         ]);
     }

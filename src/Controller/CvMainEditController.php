@@ -9,6 +9,7 @@ use App\Entity\CvJobExperienceSkills;
 use App\Entity\CvLanguages;
 use App\Entity\CvReferences;
 use App\Entity\CvWebLinks;
+use App\Repository\CvAddressRepository;
 use App\Repository\CvBaseInfoRepository;
 use App\Repository\CvJobExperienceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,7 +40,7 @@ class CvMainEditController extends AbstractController
         $action = $request->request->get('action');
 
         if ($action == 'photo') return $this->redirectToRoute('app_cv_photo_edit');
-        if ($action == 'create') return $this->redirectToRoute('app_view_cv');
+        if ($action == 'create') return $this->redirectToRoute('app_edit_cv'); // add these to the slugger
         if ($action !== null){
             return $this->redirectToRoute("app_" . $action);
         }
@@ -81,46 +82,19 @@ class CvMainEditController extends AbstractController
     #[Route('/cv-main-edit', name: 'app_cv_main_edit')]
     public function edit(Request $request): Response
     {
-        $session = $request->getSession();
 
-        if ($request->request->get('base') != null) {
-            $session->set('Edit-Base', $request->request->get('base'));
-            return $this->redirectToRoute('app_edit_cv');
-        }
-        if ($request->request->get('address') != null) {
-            $session->set('Edit-Address', $request->request->get('address'));
-            return $this->redirectToRoute('app_cv_address_edit');
-        }
-        if ($request->request->get('education') != null) {
-            $session->set('Edit-Education', $request->request->get('education'));
-            return $this->redirectToRoute('app_cv_education_edit');
-        }
-        if ($request->request->get('work') != null) {
-            $session->set('Edit-Work', $request->request->get('work'));
-            return $this->redirectToRoute('app_cv_work_experience_edit');
-        }
-        if ($request->request->get('skill') != null) {
-            $session->set('Edit-Skill', $request->request->get('skill'));
-            return $this->redirectToRoute('app_cv_work_experience_skill_edit');
-        }
-        if ($request->request->get('language') != null) {
-            $session->set('Edit-Language', $request->request->get('language'));
-            return $this->redirectToRoute('app_cv_language_edit');
-        }
-        if ($request->request->get('link') != null) {
-            $session->set('Edit-Link', $request->request->get('link'));
-            return $this->redirectToRoute('app_cv_web_links_edit');
-        }
-        if ($request->request->get('reference') != null) {
-            $session->set('Edit-Reference', $request->request->get('reference'));
-            return $this->redirectToRoute('app_cv_references_edit');
-        }
+        dd($request->request);
+        $session = new Session();
+        $cv = $request->request->get('cv_id');
+        $session->set('CvId', $cv);
+
         return $this->redirectToRoute('app_cv_main_edit');
     }
 
     #[Route('/cv-main-delete', name: 'app_cv_main_delete')]
     public function delete(Request $request): Response
     {
+        //dd($request->request);
         if ($request->request->get('address') != null) {
             $entity = $this->entityManager->find(CvAddress::class, $request->request->get('address'));
             $this->entityManager->remove($entity);
@@ -170,7 +144,8 @@ class CvMainEditController extends AbstractController
 
             return $this->redirectToRoute('app_cv_edit');
         }
-        
+
+
         return $this->redirectToRoute('app_cv_list');
     }
 }
