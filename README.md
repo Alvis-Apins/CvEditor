@@ -38,6 +38,9 @@ Next commands needs Symfony-CLI installed
 symfony console doctrine:database:create
 </pre>
 <pre>
+symfony console doctrine:migrations:migrate
+</pre>
+<pre>
 symfony server:start -d
 </pre>
 
