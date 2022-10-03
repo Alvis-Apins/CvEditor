@@ -27,6 +27,10 @@ class ViewCvController extends AbstractController
         $session = new Session();
         $cv = $session->get("CvId");
 
+        if ($cv == null) {
+            return $this->redirectToRoute('app_cv_list');
+        }
+
         $baseInfo = $this->cvBaseInfoRepository->find($cv);
         $address = $baseInfo->getAddresses()->first();
         $education = $baseInfo->getEducations()->getValues();
