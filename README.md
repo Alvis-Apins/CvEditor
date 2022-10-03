@@ -10,7 +10,7 @@ Web application lets you create your CV (Add, Edit, Delete Information and Print
 </pre>
 <pre>
 Required Tools:
-1. Symfony 6 + CLI installed (https://symfony.com/download)
+1. Symfony 6 + CLI installed (<a href="https://symfony.com/download"> ClI instalation </a>)
 2. PHP 8.1
 3. PostgreSQL - 14.5
 </pre>
